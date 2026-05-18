@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 // ===== Types =====
-type ServiceKey = "key" | "ecm" | "module" | "mechanic" | "roadside" | "toll";
+type ServiceKey = "key" | "ecm" | "module" | "mechanic" | "roadside" | "tow";
 type VehicleKey = "sedan" | "suv" | "truck" | "luxury" | "commercial";
 type YearKey = "" | "new" | "mid" | "old";
 type UrgencyKey = "" | "standard" | "priority" | "emergency";
@@ -15,7 +15,7 @@ const priceMatrix: PriceMatrix = {
   module:   { sedan: [200, 450], suv: [230, 500], truck: [250, 550], luxury: [400, 850], commercial: [350, 700] },
   mechanic: { sedan: [80, 250],  suv: [100, 280], truck: [100, 300], luxury: [150, 400], commercial: [130, 350] },
   roadside: { sedan: [60, 150],  suv: [70, 170],  truck: [80, 200],  luxury: [80, 200],  commercial: [100, 220] },
-  toll:     { sedan: [40, 120],  suv: [40, 120],  truck: [40, 120],  luxury: [50, 150],  commercial: [60, 160] },
+  tow:      { sedan: [75, 200],  suv: [85, 225],  truck: [100, 275], luxury: [125, 325], commercial: [150, 375] },
 };
 
 // ===== Hooks =====
@@ -181,7 +181,7 @@ const SERVICES: readonly Service[] = [
   { icon: "fa-bolt",         title: "Electronic Modules",  desc: "BCM, TCM, ABS, airbag, instrument cluster, and other module programming — flashed, coded, and ready to drive." },
   { icon: "fa-wrench",       title: "Mobile Mechanic",     desc: "Brake jobs, diagnostics, batteries, alternators, starters and more — performed at your home, office, or wherever you are." },
   { icon: "fa-truck-pickup", title: "Roadside Assistance", desc: "Jump starts, lockouts, fuel delivery, tire changes, and emergency repairs — 24/7 dispatch when you need us most." },
-  { icon: "fa-road",         title: "Toll Services",       desc: "Toll account assistance, transponder setup, and resolution help to keep you moving on the road." },
+  { icon: "fa-truck-moving", title: "Tow Services",         desc: "Light-duty towing, accident recovery, and vehicle transport — fast dispatch when and where you need it." },
 ];
 
 function Services() {
@@ -255,7 +255,7 @@ function Estimator() {
                 <option value="module">Electronic Module Programming</option>
                 <option value="mechanic">Mobile Mechanic Visit</option>
                 <option value="roadside">Roadside Assistance</option>
-                <option value="toll">Toll Services</option>
+                <option value="tow">Tow Services</option>
               </select>
             </div>
             <div className="form-group">
@@ -316,91 +316,33 @@ function ServiceArea() {
       <div className="container">
         <div className="section-header">
           <span className="section-tag">Coverage Area</span>
-          <h2>Serving the Greater Metro Region</h2>
-          <p>We come to you — anywhere within our service zone, day or night.</p>
+          <h2>Serving Memphis, Cordova &amp; Bartlett</h2>
+          <p>We come to you — anywhere across the Memphis metro, day or night.</p>
         </div>
         <div className="area-grid">
           <div className="area-info">
             <h3>We're Right Around the Corner</h3>
             <p>
-              Our mobile units cover a wide service radius with fast response times. Outside the main zone? Call
-              us — we may still be able to help.
+              Our mobile units cover Memphis, Cordova, Bartlett, and the surrounding Shelby County area with fast
+              response times. Outside the main zone? Call us — we may still be able to help.
             </p>
             <ul className="coverage-list">
-              <li><i className="fas fa-check-circle" /> Downtown &amp; surrounding suburbs</li>
-              <li><i className="fas fa-check-circle" /> Major highways &amp; interstates</li>
-              <li><i className="fas fa-check-circle" /> Residential &amp; commercial areas</li>
+              <li><i className="fas fa-check-circle" /> Memphis &amp; downtown</li>
+              <li><i className="fas fa-check-circle" /> Cordova &amp; Germantown line</li>
+              <li><i className="fas fa-check-circle" /> Bartlett &amp; surrounding suburbs</li>
+              <li><i className="fas fa-check-circle" /> Major highways &amp; interstates (I-40, I-240, I-269)</li>
               <li><i className="fas fa-check-circle" /> Available 24/7 for emergencies</li>
-              <li><i className="fas fa-check-circle" /> Extended service by appointment</li>
             </ul>
           </div>
           <div className="map-container">
-            <svg className="map-svg" viewBox="0 0 500 420" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <radialGradient id="coverageGrad" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="#1e6fd9" stopOpacity="0.25" />
-                  <stop offset="100%" stopColor="#1e6fd9" stopOpacity="0.05" />
-                </radialGradient>
-                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#e2e8f0" strokeWidth="1" />
-                </pattern>
-              </defs>
-              <rect width="500" height="420" fill="#f8fafc" />
-              <rect width="500" height="420" fill="url(#grid)" />
-
-              {/* Roads */}
-              <path d="M 0 180 Q 150 160 250 200 T 500 220" stroke="#cbd5e1" strokeWidth="6" fill="none" />
-              <path d="M 250 0 Q 240 100 260 210 T 280 420" stroke="#cbd5e1" strokeWidth="6" fill="none" />
-              <path d="M 0 320 L 500 300" stroke="#cbd5e1" strokeWidth="4" fill="none" />
-              <path d="M 100 0 L 120 420" stroke="#cbd5e1" strokeWidth="4" fill="none" />
-              <path d="M 380 0 L 400 420" stroke="#cbd5e1" strokeWidth="4" fill="none" />
-
-              {/* Coverage zone */}
-              <circle cx="250" cy="210" r="170" fill="url(#coverageGrad)" stroke="#1e6fd9" strokeWidth="2" strokeDasharray="6 6" />
-
-              {/* HQ Pin */}
-              <g className="map-pin">
-                <circle cx="250" cy="210" r="20" fill="#0a2540" />
-                <circle cx="250" cy="210" r="20" fill="none" stroke="#0a2540" strokeWidth="2" opacity="0.3">
-                  <animate attributeName="r" from="20" to="40" dur="2s" repeatCount="indefinite" />
-                  <animate attributeName="opacity" from="0.5" to="0" dur="2s" repeatCount="indefinite" />
-                </circle>
-                <text x="250" y="216" textAnchor="middle" fill="white" fontSize="16" fontWeight="bold">M</text>
-              </g>
-
-              {/* Service vehicle pins */}
-              <g className="map-pin">
-                <path d="M 130 130 L 138 145 L 122 145 Z" fill="#1e6fd9" />
-                <circle cx="130" cy="125" r="10" fill="#1e6fd9" />
-                <text x="130" y="129" textAnchor="middle" fill="white" fontSize="10">🚐</text>
-              </g>
-              <g className="map-pin">
-                <path d="M 370 280 L 378 295 L 362 295 Z" fill="#10b981" />
-                <circle cx="370" cy="275" r="10" fill="#10b981" />
-                <text x="370" y="279" textAnchor="middle" fill="white" fontSize="10">✓</text>
-              </g>
-              <g className="map-pin">
-                <path d="M 180 320 L 188 335 L 172 335 Z" fill="#f59e0b" />
-                <circle cx="180" cy="315" r="10" fill="#f59e0b" />
-                <text x="180" y="319" textAnchor="middle" fill="white" fontSize="10">!</text>
-              </g>
-              <g className="map-pin">
-                <path d="M 340 130 L 348 145 L 332 145 Z" fill="#1e6fd9" />
-                <circle cx="340" cy="125" r="10" fill="#1e6fd9" />
-              </g>
-
-              {/* Labels */}
-              <text x="250" y="60" textAnchor="middle" fill="#475569" fontSize="13" fontWeight="600">
-                Service Coverage Zone
-              </text>
-              <text x="250" y="78" textAnchor="middle" fill="#94a3b8" fontSize="11">~25 mile radius</text>
-
-              <rect x="20" y="370" width="160" height="40" rx="8" fill="white" stroke="#e2e8f0" />
-              <circle cx="38" cy="385" r="6" fill="#0a2540" />
-              <text x="52" y="389" fill="#1e293b" fontSize="11" fontWeight="600">HQ</text>
-              <circle cx="90" cy="385" r="6" fill="#1e6fd9" />
-              <text x="104" y="389" fill="#1e293b" fontSize="11" fontWeight="600">Mobile Unit</text>
-            </svg>
+            <iframe
+              title="Service area: Memphis, Cordova, and Bartlett"
+              src="https://www.google.com/maps?q=Cordova,TN&z=11&output=embed"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              style={{ border: 0, width: "100%", height: "100%" }}
+              allowFullScreen
+            />
           </div>
         </div>
       </div>
@@ -460,7 +402,7 @@ function Booking() {
                   <option>Electronic Module Programming</option>
                   <option>Mobile Mechanic Visit</option>
                   <option>Roadside Assistance</option>
-                  <option>Toll Services</option>
+                  <option>Tow Services</option>
                 </select>
               </div>
               <div className="form-group">
@@ -679,7 +621,7 @@ function Footer() {
             <li><a href="#services">Module Programming</a></li>
             <li><a href="#services">Mobile Mechanic</a></li>
             <li><a href="#services">Roadside Assistance</a></li>
-            <li><a href="#services">Toll Services</a></li>
+            <li><a href="#services">Tow Services</a></li>
           </ul>
         </div>
         <div className="footer-col">
@@ -697,7 +639,7 @@ function Footer() {
             <li><i className="fas fa-phone" /> (901) 304-8123</li>
             <li><i className="fas fa-envelope" /> <a href="mailto:michaelkeydrive41@gmail.com">michaelkeydrive41@gmail.com</a></li>
             <li><i className="fas fa-clock" /> 24/7 Service</li>
-            <li><i className="fas fa-map-marker-alt" /> Greater Metro Area</li>
+            <li><i className="fas fa-map-marker-alt" /> Memphis · Cordova · Bartlett</li>
           </ul>
         </div>
       </div>
