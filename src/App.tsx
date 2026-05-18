@@ -695,7 +695,7 @@ function Footer() {
           <h4>Contact</h4>
           <ul>
             <li><i className="fas fa-phone" /> (901) 304-8123</li>
-            <li><i className="fas fa-envelope" /> info@michaelkeydrive.com</li>
+            <li><i className="fas fa-envelope" /> <a href="mailto:michaelkeydrive41@gmail.com">michaelkeydrive41@gmail.com</a></li>
             <li><i className="fas fa-clock" /> 24/7 Service</li>
             <li><i className="fas fa-map-marker-alt" /> Greater Metro Area</li>
           </ul>
