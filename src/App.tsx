@@ -87,7 +87,7 @@ function Header() {
             <li><a href="#testimonials" onClick={(e) => handleAnchor(e, "#testimonials")}>Reviews</a></li>
           </ul>
         </nav>
-        <a href="tel:+10000000000" className="btn btn-primary nav-cta">
+        <a href="tel:+19013048123" className="btn btn-primary nav-cta">
           <i className="fas fa-phone" /> Call Now
         </a>
         <button
@@ -127,7 +127,7 @@ function Hero() {
             >
               <i className="fas fa-calendar-check" /> Request Service
             </a>
-            <a href="tel:+10000000000" className="btn btn-outline btn-large">
+            <a href="tel:+19013048123" className="btn btn-outline btn-large">
               <i className="fas fa-phone" /> Call Now
             </a>
           </div>
@@ -634,8 +634,8 @@ function CtaBanner() {
         <h2>Need Help Right Now?</h2>
         <p>Whether you're locked out, stranded, or just stuck — we're one call away.</p>
         <div className="cta-buttons">
-          <a href="tel:+10000000000" className="btn btn-primary btn-large">
-            <i className="fas fa-phone" /> Call (555) 555-5555
+          <a href="tel:+19013048123" className="btn btn-primary btn-large">
+            <i className="fas fa-phone" /> Call (901) 304-8123
           </a>
           <a
             href="#booking"
@@ -694,7 +694,7 @@ function Footer() {
         <div className="footer-col">
           <h4>Contact</h4>
           <ul>
-            <li><i className="fas fa-phone" /> (555) 555-5555</li>
+            <li><i className="fas fa-phone" /> (901) 304-8123</li>
             <li><i className="fas fa-envelope" /> info@michaelkeydrive.com</li>
             <li><i className="fas fa-clock" /> 24/7 Service</li>
             <li><i className="fas fa-map-marker-alt" /> Greater Metro Area</li>
@@ -725,7 +725,7 @@ export default function App() {
       <Testimonials />
       <CtaBanner />
       <Footer />
-      <a href="tel:+10000000000" className="floating-call" title="Call now" aria-label="Call now">
+      <a href="tel:+19013048123" className="floating-call" title="Call now" aria-label="Call now">
         <i className="fas fa-phone" />
       </a>
     </>
